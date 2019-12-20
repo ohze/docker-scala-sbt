@@ -1,10 +1,9 @@
-ARG SCALA_VERSION=2.13.1
 ARG SBT_VERSION=1.3.5
 
-FROM sandinh/scala:$SCALA_VERSION
+FROM adoptopenjdk:11-jdk-hotspot
 
-RUN wget -O- "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" \
-    |  tar xzf - -C /usr/local --strip-components=1 \
+RUN curl -sL "https://sbt-downloads.cdnedge.bluemix.net/releases/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" \
+    |  tar xz -C /usr/local --strip-components=1 \
     && sbt exit
 
 CMD ["sbt"]
